@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C53EC19D-3851-4943-B67E-3DE93A0C953E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Alert.Inspector</RootNamespace>
+    <AssemblyName>Alert.Inspector</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Action.RestartService\Action.RestartService.csproj">
+      <Project>{26680ABC-06BE-45E6-B2B4-CB44655DF4DA}</Project>
+      <Name>Action.RestartService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Action.SendEmail\Action.SendEmail.csproj">
+      <Project>{329D1970-56F6-45F7-A813-37659BED67F7}</Project>
+      <Name>Action.SendEmail</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alert.CheckPerfCounter\Alert.CheckPerfCounter.csproj">
+      <Project>{15BF74C7-351A-4CCB-8F5E-3D90FF910FC3}</Project>
+      <Name>Alert.CheckPerfCounter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alert.CheckQueue\Alert.CheckQueue.csproj">
+      <Project>{C82661A1-F828-4C5B-841E-7125FBD05797}</Project>
+      <Name>Alert.CheckQueue</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alert.CheckService\Alert.CheckService.csproj">
+      <Project>{3F9FE989-61D5-4518-B79C-50799945F3E4}</Project>
+      <Name>Alert.CheckService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alert.Common\Alert.Common.csproj">
+      <Project>{835315BA-DBF4-4F8A-8B6E-30F58FD795EA}</Project>
+      <Name>Alert.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Lib\log4net.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://bankofamerica.com/MMS_WebService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://bankofamerica.com/MMS_WebService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://bankofamerica.com/MMS_WebService">
+      <s:element name="InsertMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="tns:Message" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Message">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DoNotSendUntilDTS" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ForeignKeyID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SourceAppID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:MessageStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="Type" type="tns:MessageType" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecipientCollection" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="FromAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Body" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MessageId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Priority" type="tns:Priority" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="MessageStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Pending" />
+          <s:enumeration value="Processing" />
+          <s:enumeration value="Processed" />
+          <s:enumeration value="Error" />
+          <s:enumeration value="DoNotSend" />
+          <s:enumeration value="PartialError" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="MessageType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Email" />
+          <s:enumeration value="NetSend" />
+          <s:enumeration value="Communicator" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="Priority">
+        <s:restriction base="s:string">
+          <s:enumeration value="Low" />
+          <s:enumeration value="Medium" />
+          <s:enumeration value="High" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="InsertMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InsertMessageResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="InsertMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertMessage" />
+  </wsdl:message>
+  <wsdl:message name="InsertMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertMessageResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="InsertMessage">
+      <wsdl:input message="tns:InsertMessageSoapIn" />
+      <wsdl:output message="tns:InsertMessageSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertMessage">
+      <soap:operation soapAction="http://bankofamerica.com/MMS_WebService/InsertMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertMessage">
+      <soap12:operation soapAction="http://bankofamerica.com/MMS_WebService/InsertMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="http://171.197.147.117:8080/Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="http://171.197.147.117:8080/Service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
